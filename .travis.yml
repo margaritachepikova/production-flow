@@ -1,0 +1,9 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t margaritachepikova/production-flow -f Dockerfile.dev .
+
+script:
+  - docker run margaritachepikova/production-flow npm run test -- --coverage
