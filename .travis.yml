@@ -8,3 +8,17 @@ before_install:
 
 script:
   - docker run -e CI=true margaritachepikova/production-flow npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "production-flow"
+  env: "ProductionFlow-env"
+  bucket_name: "elasticbeanstalk-us-east-2-380182177737"
+  bucket_path: "production-flow"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
+
